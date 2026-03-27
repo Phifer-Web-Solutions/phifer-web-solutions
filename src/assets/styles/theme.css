@@ -8,6 +8,7 @@
   --color-accent-hover: #cf8508;
   --color-bg: #ffffff;
   --color-bg-secondary: #f2f6f8;
+  --color-surface: #f2f6f8;
   --color-bg-tertiary: #e8eef1;
   --color-bg-card: #ffffff;
   --color-bg-hover: #e6eff2;
@@ -42,6 +43,7 @@
   --color-accent-hover: #f9c163;
   --color-bg: #111b2a;
   --color-bg-secondary: #1e2c3b;
+  --color-surface: #1e2c3b;
   --color-bg-tertiary: #354454;
   --color-bg-card: #1e2b3a;
   --color-bg-hover: #344556;

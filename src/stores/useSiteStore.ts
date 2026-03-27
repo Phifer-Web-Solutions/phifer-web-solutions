@@ -4,12 +4,18 @@ import type { SiteConfig } from '@/types/site';
 export const useSiteStore = defineStore('site', {
   state: (): SiteConfig => ({
     name: 'Phifer Web Solutions',
+    logo: '',
     tagline: '',
     contactEmail: 'eric@ericphiferllc.com',
     contactPhone: '',
     address: '',
     ctaLabel: 'Get Started',
     ctaUrl: '/contact',
+    ctaHeadline: 'Ready to get started?',
+    ctaSubtext: "Let's build something great together.",
+    ctaFooterLabel: '',
+    ctaFooterUrl: '',
+    copyrightText: '',
     primaryNav: [
       { label: 'Home', to: '/' },
       { label: 'About', to: '/about' },

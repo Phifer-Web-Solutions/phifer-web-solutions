@@ -61,8 +61,13 @@ export function useSeo() {
     description: 'Phifer Web Solutions',
   });
 
+  const siteName = 'Phifer Web Solutions';
+
   useHead({
-    title: computed(() => meta.value.title),
+    title: computed(() => {
+      const t = meta.value.title;
+      return t.includes(siteName) ? t : `${t} | ${siteName}`;
+    }),
     meta: [
       { name: 'description', content: computed(() => meta.value.description) },
     ],

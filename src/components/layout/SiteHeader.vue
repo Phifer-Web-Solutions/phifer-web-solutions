@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { Menu, X, Sun, Moon } from 'lucide-vue-next';
 import { useSiteStore } from '@/stores/useSiteStore';
+import SmartLink from '@/components/ui/SmartLink.vue';
 import { useTheme } from '@/composables/useTheme';
 
 const site = useSiteStore();
@@ -15,7 +16,8 @@ const mobileOpen = ref(false);
     <div class="site-header__inner">
       <!-- Left: Logo -->
       <RouterLink to="/" class="site-header__logo" @click="mobileOpen = false">
-        {{ site.name }}
+        <img v-if="site.logo" :src="site.logo" :alt="site.name" class="site-header__logo-img" />
+        <span v-else>{{ site.name }}</span>
       </RouterLink>
 
       <!-- Center: Nav links -->
@@ -31,25 +33,25 @@ const mobileOpen = ref(false);
         </RouterLink>
 
         <!-- CTA inside mobile menu -->
-        <RouterLink
+        <SmartLink
           v-if="site.ctaLabel"
           :to="site.ctaUrl"
           class="site-header__cta site-header__cta--mobile"
           @click="mobileOpen = false"
         >
           {{ site.ctaLabel }}
-        </RouterLink>
+        </SmartLink>
       </nav>
 
       <!-- Right: CTA + theme toggle + hamburger -->
       <div class="site-header__actions">
-        <RouterLink
+        <SmartLink
           v-if="site.ctaLabel"
           :to="site.ctaUrl"
           class="site-header__cta site-header__cta--desktop"
         >
           {{ site.ctaLabel }}
-        </RouterLink>
+        </SmartLink>
 
         <button
           class="site-header__theme-toggle"
@@ -98,10 +100,18 @@ const mobileOpen = ref(false);
   font-weight: 700;
   color: var(--color-primary);
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
 }
 
 .site-header__logo:hover {
   color: var(--color-primary);
+}
+
+.site-header__logo-img {
+  height: 2rem;
+  width: auto;
+  object-fit: contain;
 }
 
 .site-header__nav {

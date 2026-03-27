@@ -11,12 +11,18 @@ export interface PageMeta {
 
 export interface SiteConfig {
   name: string;
+  logo: string;
   tagline: string;
   contactEmail: string;
   contactPhone: string;
   address: string;
   ctaLabel: string;
   ctaUrl: string;
+  ctaHeadline: string;
+  ctaSubtext: string;
+  ctaFooterLabel: string;
+  ctaFooterUrl: string;
+  copyrightText: string;
   primaryNav: NavItem[];
   footerNav: NavItem[];
   legalNav: NavItem[];

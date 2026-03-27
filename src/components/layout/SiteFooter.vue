@@ -1,21 +1,48 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
 import { useSiteStore } from '@/stores/useSiteStore';
+import { useSanity } from '@/composables/useSanity';
+import { getSocialIcon } from '@/composables/useSocialIcons';
+import SmartLink from '@/components/ui/SmartLink.vue';
 
 const site = useSiteStore();
 const year = new Date().getFullYear();
+
+const { data: socialDoc } = useSanity<{ links: { platform: string; url: string }[] }>(
+  `*[_type == "socialLinks"][0]{"links": coalesce(links, items)}`
+);
+const socialLinks = computed(() => {
+  const raw = socialDoc.value?.links || site.socialLinks;
+  return raw.map((l) => ({ ...l, platform: l.platform.toLowerCase() }));
+});
+
+const platformLabels: Record<string, string> = {
+  facebook: 'Facebook',
+  instagram: 'Instagram',
+  twitter: 'X',
+  linkedin: 'LinkedIn',
+  youtube: 'YouTube',
+  tiktok: 'TikTok',
+  github: 'GitHub',
+  pinterest: 'Pinterest',
+  threads: 'Threads',
+  bluesky: 'Bluesky',
+  mastodon: 'Mastodon',
+  nextdoor: 'Nextdoor',
+};
 </script>
 
 <template>
   <footer class="site-footer">
     <!-- Section 1: CTA Band -->
-    <div v-if="site.ctaLabel" class="cta-band">
+    <div v-if="site.ctaFooterLabel || site.ctaLabel" class="cta-band">
       <div class="cta-band__inner">
-        <h2 class="cta-band__heading">Ready to get started?</h2>
-        <p class="cta-band__text">Let's build something great together.</p>
-        <RouterLink :to="site.ctaUrl" class="cta-band__button">
-          {{ site.ctaLabel }}
-        </RouterLink>
+        <h2 class="cta-band__heading">{{ site.ctaHeadline }}</h2>
+        <p class="cta-band__text">{{ site.ctaSubtext }}</p>
+        <SmartLink :to="site.ctaFooterUrl || site.ctaUrl" class="cta-band__button">
+          {{ site.ctaFooterLabel || site.ctaLabel }}
+        </SmartLink>
       </div>
     </div>
 
@@ -37,18 +64,22 @@ const year = new Date().getFullYear();
         <!-- Copyright + Social row -->
         <div class="bottom-bar__meta">
           <p class="bottom-bar__copyright">
-            &copy; {{ year }} {{ site.name }}. All rights reserved.
+            {{ site.copyrightText || `© ${year} ${site.name}. All rights reserved.` }}
           </p>
-          <div v-if="site.socialLinks.length" class="bottom-bar__social">
+          <div v-if="socialLinks.length" class="bottom-bar__social">
             <a
-              v-for="link in site.socialLinks"
+              v-for="link in socialLinks"
               :key="link.platform"
               :href="link.url"
               target="_blank"
               rel="noopener noreferrer"
               class="bottom-bar__social-link"
+              :aria-label="platformLabels[link.platform] || link.platform"
             >
-              {{ link.platform }}
+              <svg v-if="getSocialIcon(link.platform)" class="bottom-bar__social-svg" viewBox="0 0 24 24" fill="currentColor">
+                <path :d="getSocialIcon(link.platform)!" />
+              </svg>
+              <span v-else class="bottom-bar__social-fallback">{{ (platformLabels[link.platform] || link.platform).charAt(0) }}</span>
             </a>
           </div>
         </div>
@@ -155,13 +186,29 @@ const year = new Date().getFullYear();
 }
 
 .bottom-bar__social-link {
-  font-size: 0.875rem; /* text-sm */
-  color: #9ca3af; /* text-gray-400 — 4.7:1 on #000 */
+  display: inline-flex;
+  align-items: center;
+  color: #9ca3af;
   transition: color 0.2s ease;
 }
 
 .bottom-bar__social-link:hover {
-  color: #e5e7eb; /* hover:text-gray-200 */
+  color: #e5e7eb;
+}
+
+.bottom-bar__social-svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.bottom-bar__social-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
 }
 
 @media (max-width: 768px) {

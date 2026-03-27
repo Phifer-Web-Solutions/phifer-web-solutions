@@ -98,7 +98,7 @@ const stats = computed(() => page.value?.stats || defaultStats);
           <div v-for="(item, idx) in faqs" :key="idx">
             <button class="w-full flex items-center justify-between py-5 text-left gap-4" @click="toggleFaq(idx)">
               <span class="font-medium text-[var(--color-text)] text-sm md:text-base">{{ item.question }}</span>
-              <span class="shrink-0 w-6 h-6 rounded-full bg-[var(--color-surface)] flex items-center justify-center text-xs text-[var(--color-text-secondary)] transition-transform duration-200" :class="openFaq === idx ? 'rotate-45' : ''">+</span>
+              <span class="shrink-0 w-8 h-8 rounded-full bg-[var(--color-surface)] flex items-center justify-center text-lg font-medium text-[var(--color-text-secondary)] transition-transform duration-200" :class="openFaq === idx ? 'rotate-45' : ''">+</span>
             </button>
             <div v-if="openFaq === idx" class="pb-5 text-[var(--color-text-secondary)] text-sm leading-relaxed">{{ item.answer }}</div>
           </div>
