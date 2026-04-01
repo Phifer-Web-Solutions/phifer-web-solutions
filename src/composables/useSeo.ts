@@ -2,6 +2,10 @@ import { useHead } from '@unhead/vue';
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
+const siteUrl = import.meta.env.VITE_SITE_URL || 'https://phiferwebsolutions.com';
+const siteName = 'Phifer Web Solutions';
+const defaultImage = `${siteUrl}/og-image.png`;
+
 const pageMeta: Record<string, { title: string; description: string }> = {
   '/': {
     title: 'Home',
@@ -16,16 +20,16 @@ const pageMeta: Record<string, { title: string; description: string }> = {
     description: 'Ready to talk about your website? Tell us about your organization. No sales pitch — just an honest conversation about what you need and whether we\'re a fit.',
   },
   '/privacy-policy': {
-    title: 'Privacy Policy | Phifer Web Solutions',
-    description: 'Privacy Policy - Phifer Web Solutions',
+    title: 'Privacy Policy',
+    description: 'How Phifer Web Solutions collects, uses, and protects your personal information.',
   },
   '/terms-and-conditions': {
-    title: 'Terms & Conditions | Phifer Web Solutions',
-    description: 'Terms & Conditions - Phifer Web Solutions',
+    title: 'Terms & Conditions',
+    description: 'Terms of use for the Phifer Web Solutions website.',
   },
   '/accessibility': {
-    title: 'Accessibility Statement | Phifer Web Solutions',
-    description: 'Accessibility Statement - Phifer Web Solutions',
+    title: 'Accessibility Statement',
+    description: 'Our commitment to digital accessibility and the standards we follow.',
   },
   '/services': {
     title: 'Services',
@@ -37,39 +41,71 @@ const pageMeta: Record<string, { title: string; description: string }> = {
   },
   '/process': {
     title: 'Process',
-    description: 'From first conversation to launch and beyond — here\'s exactly how working with Phifer Web Solutions looks. No surprises, no hidden steps, no runaround.',
+    description: 'From first conversation to launch and beyond — here\'s exactly how working with Phifer Web Solutions looks. No surprises, no hidden steps.',
   },
   '/support': {
     title: 'Support',
-    description: 'Current Phifer Web Solutions clients can get help here. Whether it\'s a quick fix or an update request, support is part of the plan — not an add-on.',
+    description: 'Current Phifer Web Solutions clients can get help here. Support is part of the plan — not an add-on.',
   },
 };
 
 const schemaJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "name": "Phifer Web Solutions",
-  "url": "https://phiferwebsolutions.com",
-  "email": "eric@ericphiferllc.com"
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  'name': siteName,
+  'url': siteUrl,
+  'email': 'eric@ericphiferllc.com',
+  'description': 'Web design and maintenance for nonprofits, churches, and local businesses.',
+  'image': defaultImage,
+  'address': {
+    '@type': 'PostalAddress',
+    'addressLocality': 'Fruita',
+    'addressRegion': 'CO',
+    'addressCountry': 'US',
+  },
+  'sameAs': [
+    'https://www.facebook.com/phiferwebsolutions',
+    'https://www.linkedin.com/company/phifer-web-solutions',
+  ],
 };
 
 export function useSeo() {
   const route = useRoute();
 
   const meta = computed(() => pageMeta[route.path] || {
-    title: 'Phifer Web Solutions',
-    description: 'Phifer Web Solutions',
+    title: siteName,
+    description: 'Purpose-driven web solutions for mission-focused organizations.',
   });
 
-  const siteName = 'Phifer Web Solutions';
+  const fullTitle = computed(() => {
+    const t = meta.value.title;
+    return t.includes(siteName) ? t : `${t} | ${siteName}`;
+  });
+
+  const canonicalUrl = computed(() => `${siteUrl}${route.path === '/' ? '' : route.path}`);
 
   useHead({
-    title: computed(() => {
-      const t = meta.value.title;
-      return t.includes(siteName) ? t : `${t} | ${siteName}`;
-    }),
+    title: fullTitle,
+    link: [
+      { rel: 'canonical', href: canonicalUrl },
+    ],
     meta: [
       { name: 'description', content: computed(() => meta.value.description) },
+
+      // Open Graph
+      { property: 'og:type', content: 'website' },
+      { property: 'og:site_name', content: siteName },
+      { property: 'og:title', content: fullTitle },
+      { property: 'og:description', content: computed(() => meta.value.description) },
+      { property: 'og:url', content: canonicalUrl },
+      { property: 'og:image', content: defaultImage },
+      { property: 'og:locale', content: 'en_US' },
+
+      // Twitter Card
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:title', content: fullTitle },
+      { name: 'twitter:description', content: computed(() => meta.value.description) },
+      { name: 'twitter:image', content: defaultImage },
     ],
     script: [
       {

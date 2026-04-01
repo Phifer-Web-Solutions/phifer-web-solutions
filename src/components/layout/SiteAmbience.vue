@@ -56,4 +56,10 @@ defineProps<{ variant: 'hero' | 'cta' }>()
   pointer-events: none;
   overflow: hidden;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .ambience-shape {
+    animation: none;
+  }
+}
 </style>

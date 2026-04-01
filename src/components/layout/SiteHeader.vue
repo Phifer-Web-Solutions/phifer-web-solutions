@@ -21,7 +21,7 @@ const mobileOpen = ref(false);
       </RouterLink>
 
       <!-- Center: Nav links -->
-      <nav class="site-header__nav" :class="{ 'site-header__nav--open': mobileOpen }">
+      <nav id="mobile-nav" class="site-header__nav" :class="{ 'site-header__nav--open': mobileOpen }">
         <RouterLink
           v-for="item in site.primaryNav"
           :key="item.to"
@@ -64,7 +64,9 @@ const mobileOpen = ref(false);
 
         <button
           class="site-header__hamburger"
-          aria-label="Toggle menu"
+          :aria-label="mobileOpen ? 'Close menu' : 'Open menu'"
+          :aria-expanded="mobileOpen"
+          aria-controls="mobile-nav"
           @click="mobileOpen = !mobileOpen"
         >
           <X v-if="mobileOpen" :size="24" />
@@ -132,6 +134,12 @@ const mobileOpen = ref(false);
   color: var(--color-primary);
 }
 
+.site-header__link:focus-visible {
+  outline: 3px dashed var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 .site-header__actions {
   display: flex;
   align-items: center;
@@ -176,6 +184,11 @@ const mobileOpen = ref(false);
   background-color: var(--color-border);
 }
 
+.site-header__theme-toggle:focus-visible {
+  outline: 3px dashed var(--color-primary);
+  outline-offset: 2px;
+}
+
 .site-header__hamburger {
   display: none;
   background: none;
@@ -183,6 +196,22 @@ const mobileOpen = ref(false);
   cursor: pointer;
   color: var(--color-text);
   padding: 0.375rem;
+}
+
+.site-header__hamburger:focus-visible {
+  outline: 3px dashed var(--color-primary);
+  outline-offset: 2px;
+}
+
+.site-header__cta:focus-visible {
+  outline: 3px dashed var(--color-primary);
+  outline-offset: 2px;
+}
+
+.site-header__logo:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 @media (max-width: 768px) {

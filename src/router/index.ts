@@ -8,8 +8,11 @@ const TermsAndConditions = () => import('@/pages/TermsAndConditions.vue');
 const Accessibility = () => import('@/pages/Accessibility.vue');
 const Services = () => import('@/pages/Services.vue');
 const Portfolio = () => import('@/pages/Portfolio.vue');
+const ProjectDetail = () => import('@/pages/ProjectDetail.vue');
+const TeamProjectDetail = () => import('@/pages/TeamProjectDetail.vue');
 const Process = () => import('@/pages/Process.vue');
 const Support = () => import('@/pages/Support.vue');
+const NotFound = () => import('@/pages/NotFound.vue');
 
 const routes = [
   {
@@ -53,6 +56,16 @@ const routes = [
     component: Portfolio,
   },
   {
+    path: '/portfolio/:slug',
+    name: 'ProjectDetail',
+    component: ProjectDetail,
+  },
+  {
+    path: '/team-projects/:slug',
+    name: 'TeamProjectDetail',
+    component: TeamProjectDetail,
+  },
+  {
     path: '/process',
     name: 'Process',
     component: Process,
@@ -61,6 +74,11 @@ const routes = [
     path: '/support',
     name: 'Support',
     component: Support,
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: NotFound,
   },
 ];
 

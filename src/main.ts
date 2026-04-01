@@ -14,3 +14,13 @@ app.use(router);
 app.use(head);
 
 app.mount('#app');
+
+// Allow Space key to activate links (a tags) for keyboard accessibility.
+// Native <a> elements only respond to Enter; this adds Space parity with <button>.
+document.addEventListener('keydown', (e) => {
+  if (e.key === ' ' && e.target instanceof HTMLAnchorElement) {
+    e.preventDefault();
+    e.target.click();
+  }
+});
+

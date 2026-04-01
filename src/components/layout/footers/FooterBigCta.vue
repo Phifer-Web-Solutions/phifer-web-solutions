@@ -126,7 +126,7 @@ const year = new Date().getFullYear();
 }
 
 .bottom-bar__legal-link {
-  font-size: 0.75rem; /* text-xs */
+  font-size: 0.8125rem; /* text-xs */
   color: #9ca3af; /* text-gray-400 — 4.7:1 on #000 */
   transition: color 0.2s ease;
 }

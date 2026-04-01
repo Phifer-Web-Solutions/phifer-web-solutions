@@ -95,55 +95,63 @@ const platformLabels: Record<string, string> = {
 
 /* ─── Section 1: CTA Band ─── */
 .cta-band {
-  background-color: #1f2937; /* bg-gray-900 */
+  background-color: #1f2937;
   padding: 4rem 1.5rem;
   text-align: center;
 }
 
 .cta-band__inner {
-  max-width: 48rem; /* max-w-3xl */
+  max-width: 48rem;
   margin: 0 auto;
 }
 
 .cta-band__heading {
   font-family: var(--font-heading);
-  font-size: 1.875rem; /* text-3xl */
+  font-size: 1.875rem;
   font-weight: 700;
   color: #ffffff;
   margin-bottom: 0.75rem;
 }
 
 .cta-band__text {
-  font-size: 1.125rem; /* text-lg */
-  color: #9ca3af; /* text-gray-400 */
+  font-size: 1.125rem;
+  color: #d1d5db;
   margin-bottom: 2rem;
 }
 
 .cta-band__button {
   display: inline-flex;
   align-items: center;
-  padding: 0.75rem 2rem; /* py-3 px-8 */
+  padding: 0.75rem 2rem;
   background-color: #ffffff;
-  color: #111827; /* text-gray-900 */
+  color: #111827;
   font-size: 1rem;
   font-weight: 600;
-  border-radius: 0.75rem; /* rounded-xl */
-  transition: background-color 0.2s ease;
+  border-radius: 0.75rem;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
 }
 
 .cta-band__button:hover {
-  background-color: #f3f4f6; /* hover:bg-gray-100 */
+  background-color: var(--color-accent);
   color: #111827;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.cta-band__button:focus-visible {
+  outline: 3px dashed rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
 }
 
 /* ─── Section 2: Bottom Bar ─── */
 .bottom-bar {
-  background-color: #000000; /* bg-black */
-  padding: 1.25rem 1.5rem; /* py-5 px-6 */
+  background-color: #000000;
+  padding: 1.25rem 1.5rem;
 }
 
 .bottom-bar__inner {
-  max-width: 72rem; /* max-w-6xl */
+  max-width: 72rem;
   margin: 0 auto;
 }
 
@@ -152,18 +160,24 @@ const platformLabels: Record<string, string> = {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 1.25rem; /* gap-5 */
+  gap: 1.25rem;
   margin-bottom: 0.75rem;
 }
 
 .bottom-bar__legal-link {
-  font-size: 0.75rem; /* text-xs */
-  color: #9ca3af; /* text-gray-400 — 4.7:1 on #000 */
+  font-size: 0.8125rem;
+  color: #d1d5db;
   transition: color 0.2s ease;
+  border-radius: 2px;
 }
 
 .bottom-bar__legal-link:hover {
-  color: #d1d5db; /* hover:text-gray-300 */
+  color: #ffffff;
+}
+
+.bottom-bar__legal-link:focus-visible {
+  outline: 3px dashed rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
 }
 
 /* Copyright + Social row */
@@ -176,24 +190,30 @@ const platformLabels: Record<string, string> = {
 }
 
 .bottom-bar__copyright {
-  font-size: 0.875rem; /* text-sm */
-  color: #9ca3af; /* text-gray-400 — 4.7:1 on #000 */
+  font-size: 0.875rem;
+  color: #d1d5db;
 }
 
 .bottom-bar__social {
   display: flex;
-  gap: 1.25rem; /* gap-5 */
+  gap: 1.25rem;
 }
 
 .bottom-bar__social-link {
   display: inline-flex;
   align-items: center;
-  color: #9ca3af;
+  color: #d1d5db;
   transition: color 0.2s ease;
+  border-radius: 4px;
 }
 
 .bottom-bar__social-link:hover {
-  color: #e5e7eb;
+  color: #ffffff;
+}
+
+.bottom-bar__social-link:focus-visible {
+  outline: 3px dashed rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
 }
 
 .bottom-bar__social-svg {
@@ -207,7 +227,7 @@ const platformLabels: Record<string, string> = {
   justify-content: center;
   width: 1.25rem;
   height: 1.25rem;
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 700;
 }
 

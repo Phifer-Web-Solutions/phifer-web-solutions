@@ -62,4 +62,9 @@ withDefaults(defineProps<{
   background-color: var(--color-primary);
   color: var(--color-text-inverse);
 }
+
+.btn:focus-visible {
+  outline: 3px dashed var(--color-primary);
+  outline-offset: 2px;
+}
 </style>
