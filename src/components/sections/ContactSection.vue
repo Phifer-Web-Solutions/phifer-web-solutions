@@ -62,23 +62,23 @@ function formatPhone(raw) {
             <p class="text-sm text-[var(--color-text-secondary)]">{{ section.responseTime }}</p>
           </div>
         </div>
-        <div v-if="!contactSent" class="bg-[var(--color-bg)] rounded-2xl p-6 border border-[var(--color-border)] shadow-sm space-y-4">
+        <form v-if="!contactSent" @submit.prevent="sendContact" class="bg-[var(--color-bg)] rounded-2xl p-6 border border-[var(--color-border)] shadow-sm space-y-4">
           <h3 class="text-lg font-semibold text-[var(--color-text)]">Send a Message</h3>
           <div>
             <label for="contact-name" class="block text-[0.8125rem] font-medium text-[var(--color-text-secondary)] mb-1">Full Name <span class="text-red-400" aria-hidden="true">*</span></label>
-            <input id="contact-name" v-model="contactForm.name" type="text" placeholder="Your name" aria-required="true" :aria-describedby="contactError ? 'contact-error' : undefined" class="w-full px-3 py-2.5 rounded-lg border border-[var(--color-border)] text-sm text-[var(--color-text)] bg-[var(--color-bg)] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] hover:border-[var(--color-primary)]" />
+            <input id="contact-name" v-model="contactForm.name" type="text" placeholder="Your name" required aria-required="true" :aria-describedby="contactError ? 'contact-error' : undefined" class="w-full px-3 py-2.5 rounded-lg border border-[var(--color-border)] text-sm text-[var(--color-text)] bg-[var(--color-bg)] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] hover:border-[var(--color-primary)]" />
           </div>
           <div>
             <label for="contact-email" class="block text-[0.8125rem] font-medium text-[var(--color-text-secondary)] mb-1">Email <span class="text-red-400" aria-hidden="true">*</span></label>
-            <input id="contact-email" v-model="contactForm.email" type="email" placeholder="your@email.com" aria-required="true" :aria-describedby="contactError ? 'contact-error' : undefined" class="w-full px-3 py-2.5 rounded-lg border border-[var(--color-border)] text-sm text-[var(--color-text)] bg-[var(--color-bg)] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] hover:border-[var(--color-primary)]" />
+            <input id="contact-email" v-model="contactForm.email" type="email" placeholder="your@email.com" required aria-required="true" :aria-describedby="contactError ? 'contact-error' : undefined" class="w-full px-3 py-2.5 rounded-lg border border-[var(--color-border)] text-sm text-[var(--color-text)] bg-[var(--color-bg)] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] hover:border-[var(--color-primary)]" />
           </div>
           <div>
             <label for="contact-message" class="block text-[0.8125rem] font-medium text-[var(--color-text-secondary)] mb-1">Message <span class="text-red-400" aria-hidden="true">*</span></label>
-            <textarea id="contact-message" v-model="contactForm.message" rows="4" placeholder="How can we help?" aria-required="true" :aria-describedby="contactError ? 'contact-error' : undefined" class="w-full px-3 py-2.5 rounded-lg border border-[var(--color-border)] text-sm text-[var(--color-text)] bg-[var(--color-bg)] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] hover:border-[var(--color-primary)] resize-none"></textarea>
+            <textarea id="contact-message" v-model="contactForm.message" rows="4" placeholder="How can we help?" required aria-required="true" :aria-describedby="contactError ? 'contact-error' : undefined" class="w-full px-3 py-2.5 rounded-lg border border-[var(--color-border)] text-sm text-[var(--color-text)] bg-[var(--color-bg)] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] hover:border-[var(--color-primary)] resize-none"></textarea>
           </div>
           <p v-if="contactError" id="contact-error" role="alert" class="text-red-500 text-sm">{{ contactError }}</p>
-          <button @click="sendContact" :disabled="submitting" class="w-full py-3 text-white font-semibold rounded-xl text-sm transition-colors cursor-pointer hover:opacity-90 focus-ring disabled:opacity-50 disabled:cursor-not-allowed" style="background-color: var(--color-primary)">{{ submitting ? 'Sending...' : 'Start the Conversation →' }}</button>
-        </div>
+          <button type="submit" :disabled="submitting" class="w-full py-3 text-white font-semibold rounded-xl text-sm transition-colors cursor-pointer hover:opacity-90 focus-ring disabled:opacity-50 disabled:cursor-not-allowed" style="background-color: var(--color-primary)">{{ submitting ? 'Sending...' : 'Start the Conversation →' }}</button>
+        </form>
         <div v-else class="bg-[var(--color-bg)] rounded-2xl p-6 border border-[var(--color-border)] shadow-sm flex items-center justify-center min-h-70">
           <div class="text-center">
             <div class="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3" style="background-color: color-mix(in srgb, var(--color-primary) 10%, transparent)"><span class="text-xl">✓</span></div>
