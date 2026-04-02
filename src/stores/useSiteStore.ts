@@ -5,6 +5,7 @@ export const useSiteStore = defineStore('site', {
   state: (): SiteConfig => ({
     name: 'Phifer Web Solutions',
     logo: '',
+    darkLogo: '',
     tagline: '',
     contactEmail: 'eric@ericphiferllc.com',
     contactPhone: '',

@@ -12,6 +12,7 @@ export interface PageMeta {
 export interface SiteConfig {
   name: string;
   logo: string;
+  darkLogo: string;
   tagline: string;
   contactEmail: string;
   contactPhone: string;

@@ -15,6 +15,7 @@ const site = useSiteStore();
 interface SiteSettings {
   siteName?: string;
   logo?: { asset?: { url?: string } };
+  darkLogo?: { asset?: { url?: string } };
   ctaLabel?: string;
   ctaUrl?: string;
   ctaHeadline?: string;
@@ -28,6 +29,7 @@ const { data: settings, loading: settingsLoading } = useSanity<SiteSettings>(
   `*[_type == "siteSettings"][0]{
     siteName,
     "logo": logo{asset->{url}},
+    "darkLogo": darkLogo{asset->{url}},
     ctaLabel,
     ctaUrl,
     ctaHeadline,
@@ -42,6 +44,7 @@ watch(settings, (s) => {
   if (!s) return;
   if (s.siteName) site.name = s.siteName;
   if (s.logo?.asset?.url) site.logo = s.logo.asset.url;
+  if (s.darkLogo?.asset?.url) site.darkLogo = s.darkLogo.asset.url;
   if (s.ctaLabel) site.ctaLabel = s.ctaLabel;
   if (s.ctaUrl) site.ctaUrl = s.ctaUrl;
   if (s.ctaHeadline) site.ctaHeadline = s.ctaHeadline;

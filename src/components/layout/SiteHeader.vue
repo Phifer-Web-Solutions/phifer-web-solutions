@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { RouterLink } from 'vue-router';
 import { Menu, X, Sun, Moon } from 'lucide-vue-next';
 import { useSiteStore } from '@/stores/useSiteStore';
@@ -9,6 +9,11 @@ import { useTheme } from '@/composables/useTheme';
 const site = useSiteStore();
 const { theme, toggle } = useTheme();
 const mobileOpen = ref(false);
+
+const currentLogo = computed(() => {
+  if (theme.value === 'dark' && site.darkLogo) return site.darkLogo;
+  return site.logo;
+});
 </script>
 
 <template>
@@ -16,7 +21,7 @@ const mobileOpen = ref(false);
     <div class="site-header__inner">
       <!-- Left: Logo -->
       <RouterLink to="/" class="site-header__logo" @click="mobileOpen = false">
-        <img v-if="site.logo" :src="site.logo" :alt="site.name" class="site-header__logo-img" />
+        <img v-if="currentLogo" :src="currentLogo" :alt="site.name" class="site-header__logo-img" />
         <span v-else>{{ site.name }}</span>
       </RouterLink>
 
