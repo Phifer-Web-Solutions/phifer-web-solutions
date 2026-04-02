@@ -1,26 +1,31 @@
-import { createApp } from 'vue';
+import { ViteSSG } from 'vite-ssg';
 import { createPinia } from 'pinia';
-import { createHead } from '@unhead/vue';
 import App from './App.vue';
-import router from './router';
+import routes from './router/routes';
 import './assets/styles/main.css';
 
-const app = createApp(App);
-const pinia = createPinia();
-const head = createHead();
+export const createApp = ViteSSG(
+  App,
+  {
+    routes,
+    scrollBehavior(_to, _from, savedPosition) {
+      return savedPosition || { top: 0 };
+    },
+  },
+  ({ app, isClient }) => {
+    const pinia = createPinia();
+    app.use(pinia);
 
-app.use(pinia);
-app.use(router);
-app.use(head);
+    // vite-ssg automatically installs @unhead/vue — no manual createHead() needed
 
-app.mount('#app');
-
-// Allow Space key to activate links (a tags) for keyboard accessibility.
-// Native <a> elements only respond to Enter; this adds Space parity with <button>.
-document.addEventListener('keydown', (e) => {
-  if (e.key === ' ' && e.target instanceof HTMLAnchorElement) {
-    e.preventDefault();
-    e.target.click();
-  }
-});
-
+    // Space key → activate links (keyboard accessibility, client only)
+    if (isClient) {
+      document.addEventListener('keydown', (e) => {
+        if (e.key === ' ' && e.target instanceof HTMLAnchorElement) {
+          e.preventDefault();
+          e.target.click();
+        }
+      });
+    }
+  },
+);

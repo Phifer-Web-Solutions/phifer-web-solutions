@@ -5,17 +5,19 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build",
+    "build": "vue-tsc -b && vite-ssg build",
     "preview": "vite preview"
   },
   "dependencies": {
     "@portabletext/vue": "^1.0.14",
     "@sanity/image-url": "^2.1.1",
+    "@unhead/ssr": "^2.1.12",
     "@unhead/vue": "^1.11.20",
     "@vueuse/core": "^12.7.0",
     "lucide-vue-next": "^0.474.0",
     "pinia": "^2.3.0",
     "resend": "^6.10.0",
+    "vite-ssg": "^28.3.0",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
   },

@@ -9,7 +9,9 @@ export function useTheme() {
   }
 
   watchEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme.value);
+    if (typeof document !== 'undefined') {
+      document.documentElement.setAttribute('data-theme', theme.value);
+    }
   });
 
   return { theme, toggle };

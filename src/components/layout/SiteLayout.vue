@@ -72,7 +72,8 @@ watch(navDocs, (docs) => {
   }
 });
 
-const ready = computed(() => !settingsLoading.value && !navLoading.value);
+const isSSR = typeof window === 'undefined';
+const ready = computed(() => isSSR || (!settingsLoading.value && !navLoading.value));
 </script>
 
 <template>
