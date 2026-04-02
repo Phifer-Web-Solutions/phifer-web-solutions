@@ -47,6 +47,10 @@ const pageMeta: Record<string, { title: string; description: string }> = {
     title: 'Support',
     description: 'Current Phifer Web Solutions clients can get help here. Support is part of the plan — not an add-on.',
   },
+  '/your-story': {
+    title: 'Share Your Story',
+    description: 'Tell us about your experience with Phifer Web Solutions.',
+  },
 };
 
 const schemaJsonLd = {

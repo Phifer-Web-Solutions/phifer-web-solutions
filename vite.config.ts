@@ -26,6 +26,7 @@ export default defineConfig({
         '/privacy-policy',
         '/terms-and-conditions',
         '/accessibility',
+        '/your-story',
       ];
 
       // Fetch dynamic project slugs from Sanity at build time

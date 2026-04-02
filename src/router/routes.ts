@@ -10,6 +10,7 @@ const ProjectDetail = () => import('@/pages/ProjectDetail.vue');
 const TeamProjectDetail = () => import('@/pages/TeamProjectDetail.vue');
 const Process = () => import('@/pages/Process.vue');
 const Support = () => import('@/pages/Support.vue');
+const YourStory = () => import('@/pages/YourStory.vue');
 const NotFound = () => import('@/pages/NotFound.vue');
 
 const routes = [
@@ -25,6 +26,7 @@ const routes = [
   { path: '/team-projects/:slug', name: 'TeamProjectDetail', component: TeamProjectDetail },
   { path: '/process', name: 'Process', component: Process },
   { path: '/support', name: 'Support', component: Support },
+  { path: '/your-story', name: 'YourStory', component: YourStory },
   { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
 ];
 
