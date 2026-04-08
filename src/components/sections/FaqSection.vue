@@ -19,7 +19,7 @@ function toggleFaq(idx) { openFaq.value = openFaq.value === idx ? null : idx; }
             <span class="font-medium text-[var(--color-text)] text-sm md:text-base">{{ item.question }}</span>
             <span aria-hidden="true" class="shrink-0 w-8 h-8 rounded-full bg-[var(--color-surface)] flex items-center justify-center text-lg font-medium text-[var(--color-text-secondary)] transition-transform duration-200" :class="openFaq === idx ? 'rotate-45' : ''">+</span>
           </button>
-          <div v-if="openFaq === idx" :id="`faq-panel-${idx}`" role="region" :aria-label="item.question" class="pb-5 text-[var(--color-text-secondary)] text-sm leading-relaxed px-2 -mx-2">{{ item.answer }}</div>
+          <div v-if="openFaq === idx" :id="`faq-panel-${idx}`" role="region" :aria-label="item.question" class="pb-5 text-[var(--color-text-secondary)] text-sm leading-relaxed px-2 -mx-2 whitespace-pre-line">{{ item.answer }}</div>
         </div>
       </div>
     </div>

@@ -17,7 +17,7 @@ const steps = computed(() => props.section?.steps || []);
           <div class="relative z-10 w-16 h-16 rounded-full bg-[var(--color-bg)] border-2 flex items-center justify-center text-2xl mb-4 shadow-sm" style="border-color: color-mix(in srgb, var(--color-primary) 35%, transparent)" v-html="step.icon?.svg || '📋'" role="img" :aria-label="step.title || 'Step icon'"></div>
           <div class="absolute top-0 right-6 md:right-4 w-5 h-5 rounded-full text-white text-[0.8125rem] font-bold flex items-center justify-center z-20 bg-[var(--color-primary)]">{{ idx + 1 }}</div>
           <h3 class="font-semibold text-[var(--color-text)] mb-2">{{ step.title }}</h3>
-          <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed">{{ step.description }}</p>
+          <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed whitespace-pre-line">{{ step.description }}</p>
         </div>
       </div>
     </div>

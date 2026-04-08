@@ -12,7 +12,7 @@ const bulletPoints = computed(() => props.section?.bulletPoints || []);
       <div class="flex-1 min-w-0">
         <p v-if="section?.eyebrow" class="text-sm font-semibold uppercase tracking-widest text-[var(--color-primary)] mb-3">{{ section.eyebrow }}</p>
         <h2 v-if="section?.heading" class="text-3xl font-bold text-[var(--color-text)] mb-4 leading-tight">{{ section.heading }}</h2>
-        <p v-if="section?.body" class="text-[var(--color-text-secondary)] text-base leading-relaxed mb-6">{{ section.body }}</p>
+        <p v-if="section?.body" class="text-[var(--color-text-secondary)] text-base leading-relaxed mb-6 whitespace-pre-line">{{ section.body }}</p>
         <ul v-if="bulletPoints.length" class="space-y-2 mb-8">
           <li v-for="(f, i) in bulletPoints" :key="i" class="flex items-start gap-2 text-sm text-[var(--color-text)]">
             <span class="font-bold mt-0.5 text-[var(--color-primary)]">✓</span> {{ typeof f === 'string' ? f : f.title }}

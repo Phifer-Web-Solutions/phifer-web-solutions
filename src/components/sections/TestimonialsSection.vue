@@ -16,7 +16,7 @@ const testimonials = computed(() => props.section?.items || []);
           <div class="flex gap-0.5 mb-4">
             <span v-for="n in (t.rating ?? 5)" :key="n" class="text-amber-400 text-sm">★</span>
           </div>
-          <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed flex-1 mb-6">"{{ t.quote }}"</p>
+          <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed flex-1 mb-6 whitespace-pre-line">"{{ t.quote }}"</p>
           <div class="flex items-center gap-3">
             <img v-if="t.photo" :src="sanityImage(t.photo).width(80).height(80).fit('crop').url()" :alt="t.author || t.name" loading="lazy" class="w-10 h-10 rounded-full object-cover shrink-0" />
             <div v-else class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm shrink-0" style="background-color: color-mix(in srgb, var(--color-primary) 10%, transparent); color: var(--color-primary)" role="img" :aria-label="`${t.author || t.name} avatar`">{{ (t.author || t.name).charAt(0) }}</div>

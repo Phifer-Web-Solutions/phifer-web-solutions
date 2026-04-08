@@ -13,7 +13,7 @@ const features = computed(() => props.section?.items || []);
       <div v-for="(feature, i) in features" :key="i" class="text-center p-6">
         <div class="text-4xl mb-4 feature-icon" role="img" :aria-label="feature.title || 'Feature icon'" v-html="feature.icon?.svg || '✨'"></div>
         <h3 class="text-lg font-semibold text-[var(--color-text)] mb-2">{{ feature.title }}</h3>
-        <p class="text-[var(--color-text-secondary)] text-sm">{{ feature.description }}</p>
+        <p class="text-[var(--color-text-secondary)] text-sm whitespace-pre-line">{{ feature.description }}</p>
       </div>
     </div>
   </section>

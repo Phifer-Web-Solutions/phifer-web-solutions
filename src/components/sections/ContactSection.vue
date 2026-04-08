@@ -47,7 +47,7 @@ function formatPhone(raw) {
         <div class="space-y-6">
           <div>
             <h2 v-if="section?.heading" class="text-3xl font-bold text-[var(--color-text)] mb-4 leading-tight">{{ section.heading }}</h2>
-            <p v-if="section?.preferenceNotes" class="text-[var(--color-text-secondary)] text-base leading-relaxed">{{ section.preferenceNotes }}</p>
+            <p v-if="section?.preferenceNotes" class="text-[var(--color-text-secondary)] text-base leading-relaxed whitespace-pre-line">{{ section.preferenceNotes }}</p>
           </div>
           <div v-if="section?.email || site.contactEmail">
             <p class="text-[0.8125rem] font-semibold text-[var(--color-text-secondary)] uppercase tracking-widest mb-1">Email</p>
