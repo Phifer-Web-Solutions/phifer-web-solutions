@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useSiteStore } from '@/stores/useSiteStore';
+import PhoneDisplay from '@/components/ui/PhoneDisplay.vue';
 defineProps({ section: { type: Object, default: null } });
 const site = useSiteStore();
 const contactForm = ref({ name: '', email: '', message: '' });
@@ -32,12 +33,6 @@ async function sendContact() {
   }
 }
 
-function formatPhone(raw) {
-  const digits = (raw || '').replace(/\D/g, '');
-  if (digits.length === 11 && digits[0] === '1') return formatPhone(digits.slice(1));
-  if (digits.length === 10) return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
-  return raw;
-}
 </script>
 
 <template>
@@ -55,7 +50,7 @@ function formatPhone(raw) {
           </div>
           <div v-if="section?.showPhone !== false && (section?.phone || site.contactPhone)">
             <p class="text-[0.8125rem] font-semibold text-[var(--color-text-secondary)] uppercase tracking-widest mb-1">Phone</p>
-            <a :href="'tel:' + (section?.phone || site.contactPhone)" class="text-sm font-medium text-[var(--color-primary)] hover:underline rounded focus-ring">{{ formatPhone(section?.phone || site.contactPhone) }}</a>
+            <PhoneDisplay :phone="section?.phone || site.contactPhone" :show-icon="false" />
           </div>
           <div v-if="section?.responseTime" class="flex items-start gap-2.5 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] p-4">
             <span class="text-lg leading-none mt-0.5">⏱</span>
